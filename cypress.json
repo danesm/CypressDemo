@@ -1,0 +1,18 @@
+{
+    "baseUrl": "http://localhost:3000",
+    "projectId": "oo6g6k",
+    "testFiles": [
+      "02-before_each.spec.js",
+      "01-first_test.spec.js",
+      "03-aliasing.spec.js",
+      "04-max_char_input.spec.js",
+      "05-results.spec.js",
+      "06-interactions.spec.js",
+      "07-selecting.spec.js"    
+  
+    ]
+  }
+  
+  
+  
+  
