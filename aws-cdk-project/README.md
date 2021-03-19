@@ -36,6 +36,7 @@ Tips:
 1. CDK project doesn't have to be in the same repo as your reactjs project. 
 2. CI/CD server that is running CDK must have AWS CLI and Node installed. 
 3. Use following CDK documentation for sample code snippet for other aws resources https://docs.aws.amazon.com/cdk/api/latest/docs/@aws-cdk_aws-cloudfront.CloudFrontWebDistribution.html
+4. if you are cloning this project then you don't need to do step 2 and 3.
   
 
 
