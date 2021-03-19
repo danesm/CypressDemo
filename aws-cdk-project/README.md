@@ -24,12 +24,14 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 5. npm install aws-cdk  
 6. npx cdk init app - - language typescript  > this will initialise a project with aws cdk with typescript)
 7. npm i @aws-cdk/aws-s3  > this will makesure you can work with s3 cdk commands.
-8. Add your code at project/lib/aws-cdk-demo-stack.ts file to define your assets/stack. e.g. define s3 bucket, cloud front configurations etc.
-9. npx cdk bootstrape  >  creates a staging bucket. 
-10.npx cdk synth       >  synthesize the chageset and compile AWS CDK application into an AWS CloudFormation template.  
-11.npx cdk deploy      >  deploys the stack. 
-12.npx cdk diff        >  optional and only needed if you want to check if there is any difference in you CDK code stack & actual stack created.
-13.npx cdk destroy     >  this will delete all resources that were created by above steps.
+8. npm i @aws-cdk/aws-cloudfront
+9. npm i @aws-cdl/aws-s3-deployment
+10. Add your code at project/lib/aws-cdk-demo-stack.ts file to define your assets/stack. e.g. define s3 bucket, cloud front configurations etc.
+11. npx cdk bootstrape  >  creates a staging bucket. 
+12.npx cdk synth       >  synthesize the chageset and compile AWS CDK application into an AWS CloudFormation template.  
+13.npx cdk deploy      >  deploys the stack. 
+14.npx cdk diff        >  optional and only needed if you want to check if there is any difference in you CDK code stack & actual stack created.
+15.npx cdk destroy     >  this will delete all resources that were created by above steps.
 
 Tips: 
 
@@ -37,6 +39,7 @@ Tips:
 2. CI/CD server that is running CDK must have AWS CLI and Node installed. 
 3. Use following CDK documentation for sample code snippet for other aws resources https://docs.aws.amazon.com/cdk/api/latest/docs/@aws-cdk_aws-cloudfront.CloudFrontWebDistribution.html
 4. if you are cloning this project then you don't need to do step 2 and 3.
+
   
 
 
