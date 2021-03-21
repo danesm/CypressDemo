@@ -2,13 +2,16 @@
 import 'source-map-support/register';
 import * as cdk from '@aws-cdk/core';
 import { AwsCdkProjectStack } from '../lib/aws-cdk-project-stack';
+import { NovartisDevStack } from '../lib/novartisdev-stack';
+
 
 const app = new cdk.App();
 
 
 new AwsCdkProjectStack(app, 'NovartisTest',{env: { account: '767322885366', region: 'us-east-1' }});
-new AwsCdkProjectStack(app, 'NovartisDev',{env: { account: '211826912675', region: 'eu-west-2' }});
+//new AwsCdkProjectStack(app, 'NovartisDev',{env: { account: '211826912675', region: 'eu-west-2' }});
 
+new NovartisDevStack(app, 'NovartisDev',{env: { account: '211826912675', region: 'eu-west-2' }});
 
 
 
