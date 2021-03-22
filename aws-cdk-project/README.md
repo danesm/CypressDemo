@@ -1,5 +1,7 @@
 # Welcome to example AWS CDK TypeScript project!
 
+https://github.com/danesm/CypressDemo/blob/5672b55f113e2993fd5a8a15e98ee829f05e347e/aws-cdk-project/CDK.png
+
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
