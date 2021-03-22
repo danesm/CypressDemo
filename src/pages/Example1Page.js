@@ -13,6 +13,6 @@ const Wrapper = styled.div`
 
 export const Example1Page = () => (
     <Wrapper>
-        <h1>My Test Web Application[@aws CDK is cool]</h1>
+        <h1>Testing AWS CDK Deployment</h1>
     </Wrapper>
 );
