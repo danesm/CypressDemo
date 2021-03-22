@@ -1,23 +1,18 @@
 #!/usr/bin/env node
-import 'source-map-support/register';
-import * as cdk from '@aws-cdk/core';
-import { AwsCdkProjectStack } from '../lib/aws-cdk-project-stack';
-import { NovartisDevStack } from '../lib/novartisdev-stack';
-
+import "source-map-support/register";
+import * as cdk from "@aws-cdk/core";
+import { DevStack } from "../lib/dev-stack";
+import { TestStack } from "../lib/test-stack";
 
 const app = new cdk.App();
 
+new DevStack(app, "DevStack", {
+  env: { account: "211826912675", region: "eu-west-2" },
+});
 
-new AwsCdkProjectStack(app, 'NovartisTest',{env: { account: '767322885366', region: 'us-east-1' }});
-//new AwsCdkProjectStack(app, 'NovartisDev',{env: { account: '211826912675', region: 'eu-west-2' }});
-
-new NovartisDevStack(app, 'NovartisDev',{env: { account: '211826912675', region: 'eu-west-2' }});
-
-
-
-
-//new AwsCdkProjectStack(app, 'AwsCdkProjectStack');
-
+new TestStack(app, "TestStack", {
+  env: { account: "767322885366", region: "us-east-1" },
+});
 
 /*
 multiple stacks with the same name in different accounts/regions. Consider following example code:
