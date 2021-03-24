@@ -3,6 +3,7 @@ import * as s3 from "@aws-cdk/aws-s3";
 import * as s3Deploy from "@aws-cdk/aws-s3-deployment";
 import * as cloudfront from "@aws-cdk/aws-cloudfront";
 import { Duration } from "@aws-cdk/core";
+import { AllowedIPsWaf, IPScope, IPv4 } from "allowed-ips-waf";
 
 export class DevStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -33,6 +34,12 @@ export class DevStack extends cdk.Stack {
 
     //Cloud Front Confgiuration.
 
+    // WAF Config
+    const allowedIPsWaf = new AllowedIPsWaf(this, "AllowedIPsWaf", {
+      ipScope: IPScope.CLOUDFRONT,
+      allowedIPs: [new IPv4("52.94.36.28/32"), new IPv4("54.240.0.0/16")],
+    });
+
     //Create new origin access identity - a cloudfront user
     const oia = new cloudfront.OriginAccessIdentity(this, "OIA", {
       comment: "Created by Dev CDK",
@@ -54,6 +61,10 @@ export class DevStack extends cdk.Stack {
             behaviors: [{ isDefaultBehavior: true }],
           },
         ],
+        //Implements Ip Whitelisting.
+        webACLId: allowedIPsWaf.webACLId,
+        //Enable cloudfront access log (standard logging) with a default logging bucket.
+        loggingConfig: {},
       }
     );
   }

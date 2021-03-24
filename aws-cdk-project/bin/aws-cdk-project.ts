@@ -7,7 +7,7 @@ import { TestStack } from "../lib/test-stack";
 const app = new cdk.App();
 
 new DevStack(app, "DevStack", {
-  env: { account: "211826912675", region: "eu-west-2" },
+  env: { account: "211826912675", region: "us-east-1" },
 });
 
 new TestStack(app, "TestStack", {
