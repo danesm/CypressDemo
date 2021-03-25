@@ -9,8 +9,13 @@
     "@aws-cdk/aws-kms:defaultKeyPolicies": true,
     "@aws-cdk/aws-s3:grantWriteWithoutAcl": true,
     "@aws-cdk/aws-ecs-patterns:removeDefaultDesiredCount": true,
+    
     "dev_bucket_name": "CDKDevEnvBucket",
-    "test_bucket_name": "CDKTestEnvBucket"
+    "test_bucket_name": "CDKTestEnvBucket",
+    "dev_whitelist_ip1": "52.94.0.0/16",
+    "dev_whitelist_ip2": "52.94.36.28/32",
+    "test_whitelist_ip1": "52.94.0.0/16",
+    "test_whitelist_ip2": "52.94.36.28/32"
   }
 
   

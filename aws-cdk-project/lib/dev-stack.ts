@@ -35,9 +35,13 @@ export class DevStack extends cdk.Stack {
     //Cloud Front Confgiuration.
 
     // WAF Config
+
+    const whitelistIP1 = this.node.tryGetContext("dev_whitelist_ip1");
+    const whitelistIP2 = this.node.tryGetContext("dev_whitelist_ip2");
+
     const allowedIPsWaf = new AllowedIPsWaf(this, "AllowedIPsWaf", {
       ipScope: IPScope.CLOUDFRONT,
-      allowedIPs: [new IPv4("52.94.36.28/32"), new IPv4("54.240.0.0/16")],
+      allowedIPs: [new IPv4(whitelistIP1), new IPv4(whitelistIP2)],
     });
 
     //Create new origin access identity - a cloudfront user
