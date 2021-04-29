@@ -39,6 +39,15 @@ export class DevStack extends cdk.Stack {
     const whitelistIP1 = this.node.tryGetContext("dev_whitelist_ip1");
     const whitelistIP2 = this.node.tryGetContext("dev_whitelist_ip2");
 
+    //IpRule-Allow list
+    const ipset = new wafv2.CfnIPSet(this, "LEAP_IPrule", {
+      addresses: [whitelistIP1, whitelistIP2],
+      ipAddressVersion: "IPV4",
+      scope: "CLOUDFRONT",
+      description: "LEAP PnC IP Allow List",
+      tags: [{ key: "LEAP", value: "IPSet for LEAP PnC" }],
+    });
+
     const webAcl = new wafv2.CfnWebACL(this, "WebAcl", {
       defaultAction: { allow: {} },
       description: "LEAP PnC Web ACL",
@@ -50,13 +59,13 @@ export class DevStack extends cdk.Stack {
           visibilityConfig: {
             sampledRequestsEnabled: true,
             cloudWatchMetricsEnabled: true,
-            metricName: "AWS-AWSManagedRulesAmazonIpReputationList",
+            metricName: "AWS-AWSManagedRulesSQLiRuleSet",
           },
-          name: "AWS-AWSManagedRulesAmazonIpReputationList",
+          name: "AWS-AWSManagedRulesSQLiRuleSet",
           statement: {
             managedRuleGroupStatement: {
               vendorName: "AWS",
-              name: "AWSManagedRulesAmazonIpReputationList",
+              name: "AWSManagedRulesSQLiRuleSet",
             },
           },
         },
@@ -92,6 +101,29 @@ export class DevStack extends cdk.Stack {
             },
           },
         },
+
+        {
+          priority: 4,
+          // overrideAction: { none: {} },
+          name: "LeapPnCIPRule",
+          statement: {
+            notStatement: {
+              statement: {
+                ipSetReferenceStatement: {
+                  arn: ipset.attrArn,
+                },
+              },
+            },
+          },
+          action: {
+            block: {},
+          },
+          visibilityConfig: {
+            sampledRequestsEnabled: true,
+            cloudWatchMetricsEnabled: true,
+            metricName: "LeapPnCIPRule",
+          },
+        },
       ],
       scope: "CLOUDFRONT",
       visibilityConfig: {
@@ -101,14 +133,47 @@ export class DevStack extends cdk.Stack {
       },
     });
 
-    //IpRule-Allow list
-    new wafv2.CfnIPSet(this, "LEAP_IPrule", {
-      addresses: [whitelistIP1, whitelistIP2],
-      ipAddressVersion: "IPV4",
+    /*
+    // Create rule group to associate the IP rule.
+    new wafv2.CfnRuleGroup(this, "LEAP_IPRuleGroup", {
+      capacity: 1,
       scope: "CLOUDFRONT",
-      description: "LEAP PnC IP Allow List",
-      tags: [{ key: "LEAP", value: "IPSet for LEAP PnC" }],
-    });
+      visibilityConfig: {
+        sampledRequestsEnabled: true,
+        cloudWatchMetricsEnabled: true,
+        metricName: "PnCRuleGroup",
+      },
+      description: "PnCRuleGroup to enforce IP rules",
+      name: "PnCRuleGroup",
+      rules: [
+        {
+          name: "IpAllowlistforPnC",
+          priority: 0,
+
+          statement: {
+            notStatement: {
+              statement: {
+                ipSetReferenceStatement: {
+                  arn: ipset.attrArn,
+                },
+              },
+            },
+          },
+
+          visibilityConfig: {
+            sampledRequestsEnabled: true,
+            cloudWatchMetricsEnabled: true,
+            metricName: "PnCRuleGroup",
+          },
+
+          action: {
+            block: {},
+          },
+        },
+      ],
+
+      tags: [{ key: "LEAP", value: "IPSet Rule Group for LEAP PnC" }],
+    }); */
 
     //Create new origin access identity - a cloudfront user
     const oia = new cloudfront.OriginAccessIdentity(this, "OIA", {

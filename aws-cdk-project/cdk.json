@@ -12,10 +12,20 @@
     
     "dev_bucket_name": "CDKDevEnvBucket",
     "test_bucket_name": "CDKTestEnvBucket",
+
     "dev_whitelist_ip1": "52.94.0.0/16",
-    "dev_whitelist_ip2": "52.94.36.28/32",
+    "dev_whitelist_ip2": "54.240.0.0/16",
+
     "test_whitelist_ip1": "52.94.0.0/16",
-    "test_whitelist_ip2": "52.94.36.28/32"
+    "test_whitelist_ip2": "52.94.36.28/32",
+
+    "dev_account": "211826912675",
+    "test_account": "767322885366",
+    
+    "dev_region":"us-east-1",
+    "test_region":"us-east-1"
+    
+
   }
 
   
