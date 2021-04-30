@@ -15,7 +15,7 @@ export class DevStack extends cdk.Stack {
 
     //create s3 bucket.
 
-    const devBucket = new s3.Bucket(this, bucket_name, {
+    const devBucket = new s3.Bucket(this, String(bucket_name), {
       publicReadAccess: false,
       websiteIndexDocument: "index.html",
       versioned: false,
@@ -177,7 +177,7 @@ export class DevStack extends cdk.Stack {
 
     //Create new origin access identity - a cloudfront user
     const oia = new cloudfront.OriginAccessIdentity(this, "OIA", {
-      comment: "Created by Dev CDK",
+      comment: "Created by Dev AWS CDK Project",
     });
 
     //Grant readonly access to origin bucket for cloudfront.
