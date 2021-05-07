@@ -23,8 +23,9 @@
     "test_account": "767322885366",
     
     "dev_region":"us-east-1",
-    "test_region":"us-east-1"
-    
+    "test_region":"us-east-1",
+
+    "dist_path": "../build"
 
   }
 

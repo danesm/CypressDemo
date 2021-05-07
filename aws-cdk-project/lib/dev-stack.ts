@@ -4,6 +4,7 @@ import * as s3Deploy from "@aws-cdk/aws-s3-deployment";
 import * as cloudfront from "@aws-cdk/aws-cloudfront";
 import { Duration } from "@aws-cdk/core";
 import * as wafv2 from "@aws-cdk/aws-wafv2";
+//import * as path from "path";
 
 export class DevStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -13,7 +14,10 @@ export class DevStack extends cdk.Stack {
 
     const bucket_name = this.node.tryGetContext("dev_bucket_name");
 
-    //create s3 bucket.
+    //const app = new cdk.App();
+    const dist = this.node.tryGetContext("dist_path");
+
+    //create s3 bucket
 
     const devBucket = new s3.Bucket(this, String(bucket_name), {
       publicReadAccess: false,
@@ -26,8 +30,12 @@ export class DevStack extends cdk.Stack {
     // Deploy code from build folder to s3.
 
     new s3Deploy.BucketDeployment(this, "DevBuildDeployBucket", {
+      //sources: [s3Deploy.Source.asset("../build")],
+      //sources: [s3Deploy.Source.asset(String(dist))],
       sources: [s3Deploy.Source.asset("../build")],
+
       destinationBucket: devBucket,
+
       cacheControl: [s3Deploy.CacheControl.maxAge(Duration.seconds(60))],
       //destinationKeyPrefix: 'web/static' // optional prefix in destination bucket
     });
