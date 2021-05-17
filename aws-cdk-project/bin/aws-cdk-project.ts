@@ -17,6 +17,9 @@ new TestStack(app, "TestStack", {
   env: { account: "767322885366", region: "us-east-1" },
 });
 
+//CDK reading ENV varible from Mac.
+let myhome = process.env.HOME;
+console.log(" TEST ENV:" + myhome);
 /*
 multiple stacks with the same name in different accounts/regions. another example code:
 

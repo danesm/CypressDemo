@@ -29,16 +29,16 @@ export class DevStack extends cdk.Stack {
 
     // Deploy code from build folder to s3.
 
-    new s3Deploy.BucketDeployment(this, "DevBuildDeployBucket", {
-      //sources: [s3Deploy.Source.asset("../build")],
-      //sources: [s3Deploy.Source.asset(String(dist))],
-      sources: [s3Deploy.Source.asset("../build")],
+    //new s3Deploy.BucketDeployment(this, "DevBuildDeployBucket", {
+    //sources: [s3Deploy.Source.asset("../build")],
+    //sources: [s3Deploy.Source.asset(String(dist))],
+    //sources: [s3Deploy.Source.asset("../build")],
 
-      destinationBucket: devBucket,
+    //destinationBucket: devBucket,
 
-      cacheControl: [s3Deploy.CacheControl.maxAge(Duration.seconds(60))],
-      //destinationKeyPrefix: 'web/static' // optional prefix in destination bucket
-    });
+    //cacheControl: [s3Deploy.CacheControl.maxAge(Duration.seconds(60))],
+    //destinationKeyPrefix: 'web/static' // optional prefix in destination bucket
+    //});
 
     //Cloud Front Confgiuration.
 
